@@ -6,31 +6,51 @@ Write your code in this editor and press "Run" button to compile and execute it.
 
 *******************************************************************************/
 
+
+// Предложение. 
+// Хранит строку переменной длины представляющую собой предложение. 
+// Методы: добавить слово, удалить слово, вставить слово, количество букв, 
+// количество слов, самое длинное слово, самое короткое слово, 
+// есть ли в предложении заданное слово, слово под заданным номером, равны ли два предложения.
+
+// Выполненное:
+// 1)Классы. Диаграммы классов.
+// 2) Конструкторы-деструкторы. Три конструктора: по умолчанию, с параметром, копирования. (для своего класса делать)
+
+
 #include <iostream>
 
 using namespace std;
 
 class Sentence {
+
     private:
-        string sentence;
-    public:
+        
+		string sentence;
+    
+	public:
+
         Sentence() {
             sentence = "Hello, world!";
             cout << endl << "Конструктор без параметров: ";
         }
+
         
         Sentence(string str) {
             sentence = str;
             cout << endl << "Конструктор с параметрами: ";
         }
+
         
         Sentence(const Sentence& other) {
             sentence = other.sentence;
         }
+
         
         void Print() {
             cout << endl << this->sentence << endl;
         }
+
         
         void Add_Word() {
             cout << endl << "Добавление слова:" << endl;
@@ -58,6 +78,7 @@ class Sentence {
                     break;
             }
         }
+
         
         void Delete_Word() {
             cout << endl << "Удаление слова: " << endl;
@@ -72,14 +93,17 @@ class Sentence {
             total_spaces - 2;
             
     		for (int i = 0; i < new_sentence.length(); i++) {
-    			if (new_sentence[i] != word_to_delete) {
+    			
+				if (new_sentence[i] != word_to_delete) {
     				count_spaces == count_spaces;
     			} else {
     				count_spaces++;
-    				if (count_spaces == total_spaces) {
+    				
+					if (count_spaces == total_spaces) {
     				    new_sentence[i++];
 					}
-    				while (new_sentence[i] != word_to_delete && new_sentence[i] != NULL) {
+    				
+					while (new_sentence[i] != word_to_delete && new_sentence[i] != NULL) {
     					new_sentence.erase(i, 1);
     				}
     			}
@@ -88,6 +112,7 @@ class Sentence {
     		cout << "Исходное предложение: " << sentence << endl;
     		cout << "Предложение с удаленным словом: " << new_sentence << endl;
         }
+
         
         void Number_Of_Letters() {
             cout << endl << "Подсчет количества букв:" << endl;
@@ -95,42 +120,49 @@ class Sentence {
             char Space(' ');
             
             for (int i = 0; i < sentence.length(); i++) {
-                if (sentence[i] != Space) {
+                
+				if (sentence[i] != Space) {
                     count_letters++;
                 }
             }
+
             cout << "Исходное предложение: " << sentence << endl;
             cout << "Количество букв: " << count_letters << endl;
         }
+
         
         void Number_Of_Words() {
             cout << endl << "Подсчет количества слов:" << endl;
     		char Space(' ');
     		int	count_word = 0, new_const = 0;
     
-    
     		for (int i = 0; i < sentence.length(); i++) {
-    			if (sentence[i] == Space && sentence[i + 1] == Space) {
+    			
+				if (sentence[i] == Space && sentence[i + 1] == Space) {
     				sentence[i++];
     				count_word++;
     			} else {
-    				if (sentence[i] == Space) {
+    				
+					if (sentence[i] == Space) {
     					count_word++;
     				}
     			}
     		}
-    		if (sentence[0] == Space) {
+    		
+			if (sentence[0] == Space) {
     			count_word--;
     		}
     
     		new_const = sentence.length();
-    		if (sentence[new_const - 1] != Space) {
+    		
+			if (sentence[new_const - 1] != Space) {
     		    count_word++;
     		}
     		cout << "Исходное предложение: " << sentence << endl;
     		cout << "Количество слов: " << count_word << endl;
 
         }
+
         
         void Longest_Word() {
             cout << endl << "Подсчет длины слов:" << endl;
@@ -138,27 +170,35 @@ class Sentence {
     		int mass[10];
     		int start_id, count_letters = 0, max_count = 0, count_letters_2 = 0, otd;
     		int j = 0;;
+
     		for (int i = 0; i < sentence.length(); i++) {
     			otd = sentence[i];
     			count_letters = 0;		
-    			while (sentence[i] != Space && i < sentence.length()) {
+    			
+				while (sentence[i] != Space && i < sentence.length()) {
     				sentence[i++];
     				count_letters++;
     				otd = sentence[i - count_letters];
     			}
+
     			if (otd != Space) {
     
     				mass[j] = count_letters;
-    				if (mass[j - 1] < mass[j]) {
+    				
+					if (mass[j - 1] < mass[j]) {
     					max_count = i - count_letters;
     				}
+
     				mass[j++];
     			}
     		}
+
     		cout << "Исходное предложение: " << sentence << endl;
     		cout << endl << "Самое длинное слово: " << endl;
-    		for (int i = max_count; i < sentence.length(); i++) {
-    			while (sentence[i] != Space && i < sentence.length()) {
+    		
+			for (int i = max_count; i < sentence.length(); i++) {
+    			
+				while (sentence[i] != Space && i < sentence.length()) {
     				cout << sentence[i];
     				sentence[i++];
     			}
@@ -169,19 +209,24 @@ class Sentence {
 
 
 int main() {
+	
 	setlocale(LC_ALL, "RUS");
 	
-	Sentence sent_without_params;
-	sent_without_params.Print();
+	Sentence withoutParams;
+	withoutParams.Print();
 	
-	Sentence sent("word1 word22 word333");
-	sent.Print();
+	Sentence withParams("word1 word22 word333");
+	withParams.Print();
 	
-	sent.Add_Word();
-	sent.Delete_Word();
-	sent.Number_Of_Letters();
-	sent.Number_Of_Words();
-	sent.Longest_Word();
+	withParams.Add_Word();
+	withParams.Delete_Word();
+	withParams.Number_Of_Letters();
+	withParams.Number_Of_Words();
+	withParams.Longest_Word();
+
+	cout << endl;
+	cout << endl <<"Завершение программы" << endl;
+	cout << endl;
 	
 	return 0;
 };
